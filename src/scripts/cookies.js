@@ -53,3 +53,64 @@ function getWindowWidth() {
 function getWindowHeight() {
   return window.innerHeight;
 }
+
+function getCookie(cookie) {
+	let cookies = document.cookie.split(";");
+	for (let i=0;i<cookies.length;++i) {
+		if (decodeURIComponent(cookies[i].split("=")[0])===cookie) {
+			return cookies[i].split("=")[1];
+		} 
+	}
+	return "";
+}
+
+function setCookie(cookie, value) {
+	document.cookie = `${cookie}=${encodeURIComponent(value)}; path=/; max-age=${10}; SameSite="Lax";`;
+}
+
+function pageLoaded() {
+	let cookie = getCookie("cookies-enabled");
+	if (cookie==="y") {
+		loadCookies();
+		return
+	}
+	promptCookies();
+}
+
+function promptCookies() {
+	document.querySelector(".cookie-prompt").classList.add("active");
+	document.querySelector(".cookie-prompt .cookie-accept").addEventListener("click", acceptCookies);
+	document.querySelector(".cookie-prompt .cookie-deny").addEventListener("click", cookieSettings);
+}
+
+function acceptCookies(e) {
+	if (document.querySelector(".browser-toggle").checked) {
+
+	}
+	if (document.querySelector(".os-toggle").checked) {
+		
+	}
+	if (document.querySelector(".sw-toggle").checked) {
+		
+	}
+	if (document.querySelector(".sh-toggle").checked) {
+		
+	}
+	document.querySelector(".cookie-prompt").classList.remove("active");
+	document.querySelector(".cookie-settings").classList.remove("active");
+
+	setCookie("cookies-enabled", "y");
+}
+
+function cookieSettings(e) { //settings menu
+	document.querySelector(".cookie-prompt").classList.remove("active");
+	document.querySelector(".cookie-settings").classList.add("active");
+	//setCookie("cookies-enabled", "n");
+	document.querySelector(".cookie-settings .cookie-save").addEventListener("click", acceptCookies);
+}
+
+function loadCookies() {
+
+}
+
+pageLoaded(); //since we are using defer

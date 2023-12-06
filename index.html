@@ -22,10 +22,47 @@
 
   <link rel="stylesheet" href="./src/css/index.css">
 
-  <script src="src/scripts/cookies.js"></script>
+  <script src="src/scripts/cookies.js" defer></script>
 </head>
 
 <body>
 </body>
-
+	<div class="cookie-prompt cookie-menu">
+		<h2>Cookies</h2>
+		<p>This page uses cookies to improve user experience. 
+			By clicking "accept" you agree to the use of cookies for marketing and analytics purposes.
+		</p>
+		<div class="cookie-buttons">
+			<button class="cookie-button cookie-accept">Accept</button>
+			<button class="cookie-button cookie-deny">Settings</button>
+		</div>
+	</div>
+	<div class="cookie-settings cookie-menu">
+		<h2>Settings</h2>
+		<p>Browser
+			<label class="switch"> <!--Yes, this html is from w3 schools. I will do the css myself though-->
+				<input class="browser-toggle" type="checkbox" checked>
+				<span class="slider"></span>
+			</label>
+		</p>
+		<p>Operating System
+			<label class="switch">
+				<input class="os-toggle" type="checkbox" checked>
+				<span class="slider"></span>
+			</label>
+		</p>
+		<p>Screen Width
+			<label class="switch"> <!--Yes, this html is from w3 schools. I will do the css myself though-->
+				<input class="sw-toggle" type="checkbox" checked>
+				<span class="slider"></span>
+			</label>
+		</p>
+		<p>Screen Height
+			<label class="switch"> <!--Yes, this html is from w3 schools. I will do the css myself though-->
+				<input class="sh-toggle" type="checkbox" checked>
+				<span class="slider"></span>
+			</label>
+		</p>
+		<button class="cookie-button cookie-save">Save</button>
+	</div>
 </html>
