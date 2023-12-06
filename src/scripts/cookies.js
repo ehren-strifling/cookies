@@ -47,25 +47,25 @@ function getBrowser() {
   if (b<0) {b = str.length;}
   return str.substring(a,b);
 }
-function getWindowWidth() {
-  return window.innerWidth;
+function getScreenWidth() {
+  return screen.width;
 }
-function getWindowHeight() {
-  return window.innerHeight;
+function getScreenHeight() {
+  return screen.height;
 }
 
 function getCookie(cookie) {
 	let cookies = document.cookie.split(";");
 	for (let i=0;i<cookies.length;++i) {
-		if (decodeURIComponent(cookies[i].split("=")[0])===cookie) {
-			return cookies[i].split("=")[1];
+		if (cookies[i].split("=")[0].trim()===cookie) {
+			return decodeURIComponent(cookies[i].split("=")[1]);
 		} 
 	}
 	return "";
 }
 
-function setCookie(cookie, value) {
-	document.cookie = `${cookie}=${encodeURIComponent(value)}; path=/; max-age=${10}; SameSite="Lax";`;
+function setCookie(cookie, value, maxAge = 10) {
+	document.cookie = `${cookie}=${encodeURIComponent(value)}; path=/; max-age=${maxAge}; SameSite="Lax";`;
 }
 
 function pageLoaded() {
@@ -85,21 +85,22 @@ function promptCookies() {
 
 function acceptCookies(e) {
 	if (document.querySelector(".browser-toggle").checked) {
-
+		setCookie("browser", getBrowser());
 	}
 	if (document.querySelector(".os-toggle").checked) {
-		
+		setCookie("os", getOS());
 	}
 	if (document.querySelector(".sw-toggle").checked) {
-		
+		setCookie("swidth", getScreenWidth());
 	}
 	if (document.querySelector(".sh-toggle").checked) {
-		
+		setCookie("sheight", getScreenHeight());
 	}
 	document.querySelector(".cookie-prompt").classList.remove("active");
 	document.querySelector(".cookie-settings").classList.remove("active");
 
 	setCookie("cookies-enabled", "y");
+	console.log(document.cookie);
 }
 
 function cookieSettings(e) { //settings menu
@@ -110,7 +111,10 @@ function cookieSettings(e) { //settings menu
 }
 
 function loadCookies() {
-
+	console.log(`Browser: ${getCookie("browser")}`);
+	console.log(`Operating System: ${getCookie("os")}`);
+	console.log(`Screen Width: ${getCookie("swidth")}`);
+	console.log(`Screen Height: ${getCookie("sheight")}`);
 }
 
 pageLoaded(); //since we are using defer
