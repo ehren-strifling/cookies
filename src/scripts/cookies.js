@@ -64,17 +64,42 @@ function getCookie(cookie) {
 	return "";
 }
 
-function setCookie(cookie, value, maxAge = 10) {
+function setCookie(cookie, value, maxAge = 15) {
 	document.cookie = `${cookie}=${encodeURIComponent(value)}; path=/; max-age=${maxAge}; SameSite="Lax";`;
 }
 
 function pageLoaded() {
+	cookieText();
 	let cookie = getCookie("cookies-enabled");
 	if (cookie==="y") {
 		loadCookies();
 		return
 	}
 	promptCookies();
+}
+
+function cookieText() {
+	let string = "";
+	for (let i=0;i<999;++i) {
+		string+=randomText();
+		string+=" ";
+	}
+	string+=randomText();
+	document.querySelector(".cookie").innerHTML = string;
+}
+
+function randomText() {
+	let r = Math.floor(Math.random()*4);
+	switch(r) {
+		case 0:
+			return `<span style='font-size: ${Math.floor(Math.random()*24)+8}px'>Cookies!</span>`;
+		case 1:
+			return `<span style='font-size: ${Math.floor(Math.random()*24)+8}px' class='orange'>Cookies!</span>`;
+		case 2:
+			return `<span style='font-size: ${Math.floor(Math.random()*24)+8}px' class='green'>Cookies!</span>`;
+		case 3:
+			return `<span style='font-size: ${Math.floor(Math.random()*24)+8}px' class='purple'>Cookies!</span>`;
+	}
 }
 
 function promptCookies() {
