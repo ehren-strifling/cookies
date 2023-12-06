@@ -78,6 +78,10 @@ function pageLoaded() {
 }
 
 function promptCookies() {
+	[...document.querySelectorAll(".cookie-settings input[type='checkbox']")].forEach(e=>{
+		e.checked = true;
+	})
+
 	document.querySelector(".cookie-prompt").classList.add("active");
 	document.querySelector(".cookie-prompt .cookie-accept").addEventListener("click", acceptCookies);
 	document.querySelector(".cookie-prompt .cookie-deny").addEventListener("click", cookieSettings);
@@ -111,10 +115,18 @@ function cookieSettings(e) { //settings menu
 }
 
 function loadCookies() {
-	console.log(`Browser: ${getCookie("browser")}`);
+	if (getCookie("browser")) {
+		console.log(`Browser: ${getCookie("browser")}`);
+	}
+	if (getCookie("os")) {
 	console.log(`Operating System: ${getCookie("os")}`);
+	}
+	if (getCookie("swidth")) {
 	console.log(`Screen Width: ${getCookie("swidth")}`);
+	}
+	if (getCookie("sheight")) {
 	console.log(`Screen Height: ${getCookie("sheight")}`);
+	}
 }
 
 pageLoaded(); //since we are using defer
